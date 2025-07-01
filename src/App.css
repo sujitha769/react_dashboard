@@ -1,0 +1,242 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cagliostro&family=Nerko+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+    
+  }
+
+.navSection{
+
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    background-color: #8875c6;
+ color: white;
+ padding: 0 20px;
+ font-size:large ;
+ 
+}
+.sideBarSection{
+border-top: white 2px solid;
+  width: 80%;
+  max-width: 15%;
+  height: 87vh;
+  padding-top: 10px;
+  background-color: #8875c6;
+
+  color: white;
+border-top-right-radius: 15px;   
+  border-bottom-right-radius: 15px;
+}
+.sideBarSection ul li{
+  list-style: none;
+  margin-bottom: 20px;
+  font-weight: 550;
+  font-size: medium;
+  cursor: pointer;
+}
+/*login section*/
+.loginsection{
+margin-top: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+.collectionSection{
+  display: flex;
+}
+.authForm{
+  width: 100%;
+  max-width: 50%;
+  
+  margin-top: -230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(96, 96, 179, 1) 0%, rgb(111, 89, 159) 100%);
+  border-radius: 10px;
+  color: white;
+}
+.authForm input{
+  width: 100%;
+  max-width: 55%;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+}
+.registerSection{
+  
+  margin-top: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+}
+.authForm label{
+  width: 100%;
+  max-width: 55%;
+  font-weight: 400;
+}
+
+/* firmsection */
+
+ .firmsection{
+  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80%;
+  margin-top: 50px;
+
+
+} 
+
+
+.tableform{
+  border: none;
+    width: 100%;
+  max-width: 50%;
+
+  
+   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  margin-top: -100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2px;
+  border-radius: 10px;
+     background: linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(96, 96, 179, 1) 0%, rgb(111, 89, 159) 100%);
+     color: white;
+    
+}
+
+
+.tableform input{
+  width: 100%;
+background-color: rgb(229, 226, 220);
+  height:35px;
+    max-width: 85%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.tableform label{
+  width: 100%;
+  max-width: 85%;
+  font-weight: 400;
+  color: rgb(239, 236, 236);
+
+}
+
+
+.checkinp label {
+  font-weight: 500;
+  min-width: 100px;
+  color: grey;
+}
+
+.inputscontainer {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px;
+}
+
+.checkboxcontainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.checkboxcontainer input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+} 
+
+/*product table*/
+.producttable{
+
+  width: 80vw;
+
+  border-collapse: collapse;
+  margin-top: 50px;
+  margin-left: 14px;
+}
+.producttable th,
+.producttable td{
+  border: 2px solid black;
+  padding: 8px;
+}
+.producttable th{
+  text-align: left;
+  background-color: rgb(78, 153, 168);
+}
+/*not found*/
+.errorsection{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.errorsection h1{
+  font-size: xx-large;
+  color: red;
+}
+.checkinpcat{
+
+ 
+  display: flex;
+  flex-direction: column;
+  width: 87%;
+    margin-top: 7px;
+}
+.labeldiv{
+color: #088e7c;
+
+}
+.checkinpregion{
+  
+ 
+  display: flex;
+  flex-direction: column;
+  width: 87%;
+  margin-top: 7px;
+  margin-bottom: 4px;
+
+
+}
+
+
+
+button{
+  background: rgb(6, 112, 48);
+  padding: 10px;
+  border-radius: 50px;
+  width: 150px;
+  margin-bottom: 5px;
+  border: none;
+  font-weight: bold;
+  color: white;
+
+}

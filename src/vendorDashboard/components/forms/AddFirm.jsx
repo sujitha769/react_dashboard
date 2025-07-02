@@ -79,14 +79,8 @@ const HandlefirmSubmit = async (e) => {
     });
 
     const data = await response.json();
-
     if (response.ok) {
       console.log(data);
-       if (data.firm && data.firm._id) {
-        localStorage.setItem('firmId', data.firm._id);
-      } else {
-        console.warn("No firm ID found in response:", data);
-      }
             setfirmname("");
             setarea("")
             setcategory([]);
@@ -102,14 +96,9 @@ const HandlefirmSubmit = async (e) => {
 
 
 
-//     // const firmId=data.firmId;
-//     // localStorage.setItem('firmId',firmId)
-//     if (data.firm && data.firm._id) {
-//   localStorage.setItem('firmId', data.firm._id);
-// } else {
-//   console.warn("No firm ID found in response:", data);
-// }
-
+    // console.log("this is firm id",data.firmId)
+    const firmId=data.firmId;
+    localStorage.setItem('firmId',firmId)
   } catch (error) {
     console.log("failed to add firm",error);
   }

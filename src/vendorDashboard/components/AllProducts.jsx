@@ -61,7 +61,7 @@ const AllProducts = () => {
         <tbody>
           {products.map((item)=>{
             return(
-              <>
+              //<>
               <tr key={item._id}>
               
                 <td>{item.productName}</td>
@@ -76,7 +76,7 @@ const AllProducts = () => {
               </td>
 
               </tr>
-              </>
+             // </>
             )
           })}
         </tbody>

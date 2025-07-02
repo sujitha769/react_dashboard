@@ -1,85 +1,98 @@
-import React,{useState} from 'react'
+// import React, { useState } from 'react';
 import { API_URL } from '../../data/apiPath';
 
-const Login = ({showwelcomeHandler}) => {
+const Login = ({ showwelcomeHandler }) => {
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const[email,setemail]=useState("");
-  const[password,setPassword]=useState("");
- 
+  const loginHandler = async (e) => {
+    e.preventDefault();
 
-const loginHandler = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await fetch(`${API_URL}/vendor/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password })
-    });
+    try {
+      const response = await fetch(`${API_URL}/vendor/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      alert("login success");
-      setPassword("");
-      setemail("");
+      if (response.ok && data.vendor) {
+        alert("login success");
+        setPassword("");
+        setemail("");
 
-      localStorage.setItem('loginToken', data.token);
-      const vendorId = data.vendor._id;
-      localStorage.setItem('vendorId', vendorId);
-      console.log("checking for vendor id", vendorId);
+        localStorage.setItem('loginToken', data.token);
 
-      // 🔒 wrap this part in its own try-catch
-      try {
-        const vendorResponse = await fetch(`${API_URL}/vendor/single-vendor/${vendorId}`);
-        const vendorData = await vendorResponse.json();
+        const vendorId = data.vendor._id;
+        localStorage.setItem('vendorId', vendorId);
+        console.log("checking for vendor id", vendorId);
 
-        if (vendorResponse.ok) {
-          const vendorFirmId = vendorData.vendorFirmId;
-          const vendorFirmName = vendorData.vendor.firm[0].firmName;
-          console.log("firmname", vendorFirmName);
-          console.log("checking for firm id", vendorFirmId);
+        try {
+          const vendorResponse = await fetch(`${API_URL}/vendor/single-vendor/${vendorId}`);
+          const vendorData = await vendorResponse.json();
 
-          localStorage.setItem('firmId', vendorFirmId);
-          localStorage.setItem('firmName', vendorFirmName);
-          showwelcomeHandler();
-          window.location.reload();
-        } else {
-          console.error("Vendor fetch failed", vendorData);
+          if (vendorResponse.ok) {
+            const vendorFirmId = vendorData.vendorFirmId;
+            const vendorFirmName = vendorData.vendor.firm[0].firmName;
+
+            console.log("firmname", vendorFirmName);
+            console.log("checking for firm id", vendorFirmId);
+
+            localStorage.setItem('firmId', vendorFirmId);
+            localStorage.setItem('firmName', vendorFirmName);
+
+            showwelcomeHandler();
+            window.location.reload();
+          } else {
+            console.error("Vendor fetch failed", vendorData);
+          }
+
+        } catch (err) {
+          console.error("Error fetching vendor details", err);
         }
-      } catch (err) {
-        console.error("Error fetching vendor details", err);
+
+      } else {
+        alert("login failed");
+        console.error("Login error:", data.error || "Unknown error");
       }
 
-    } else {
+    } catch (error) {
+      console.error("Login failed:", error);
       alert("login failed");
     }
+  };
 
-  } catch (error) {
-    console.error("Login failed:", error);
-    alert("login failed");
-  }
+  return (
+    <div className="loginsection">
+      <form className='authForm' onSubmit={loginHandler}>
+        <h3>Vendor Login</h3><br />
+        <label>Email</label>
+        <input
+          type='text'
+          name='email'
+          value={email}
+          onChange={(e) => setemail(e.target.value)}
+          placeholder='Enter Email'
+        /><br />
+
+        <label>Password</label>
+        <input
+          type='password'
+          name='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder='Enter Password'
+        /><br />
+
+        <div className="btnsubmit">
+          <button type='submit'>Submit</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
-
-   
-  return (
-   
-   <div className="loginsection">
-  
-    <form className='authForm' onSubmit={loginHandler}>
-        <h3>Vendor Login</h3><br/>
-      <label>Email</label>
-      <input type='text' name='email' value={email} onChange={(e)=>setemail(e.target.value)} placeholder='Enter Email'/><br/>
-            <label>Password</label>
-      <input type='Password' name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='Enter Password'/><br/>
-      <div className="btnsubmit">
-        <button type='submit'>Submit</button>
-      </div>
-    </form>
-   </div>
-  )
-}
-
-export default Login
+export default Login;

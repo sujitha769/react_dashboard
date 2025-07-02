@@ -7,7 +7,7 @@ const Login = ({showwelcomeHandler}) => {
   const[password,setPassword]=useState("");
  
 
-  const loginHandler = async (e) => {
+const loginHandler = async (e) => {
   e.preventDefault();
   try {
     const response = await fetch(`${API_URL}/vendor/login`, {
@@ -19,37 +19,48 @@ const Login = ({showwelcomeHandler}) => {
     });
 
     const data = await response.json();
+
     if (response.ok) {
       alert("login success");
-      setPassword("")
-      setemail("")
-      
+      setPassword("");
+      setemail("");
+
       localStorage.setItem('loginToken', data.token);
-      showwelcomeHandler()
-    }
-       //const vendorId=data.vendorId
-       const vendorId = data.vendor._id;
+      const vendorId = data.vendor._id;
+      localStorage.setItem('vendorId', vendorId);
+      console.log("checking for vendor id", vendorId);
 
-       console.log("checking for vendor id",vendorId)
-       localStorage.setItem('vendorId', vendorId);
+      // 🔒 wrap this part in its own try-catch
+      try {
+        const vendorResponse = await fetch(`${API_URL}/vendor/single-vendor/${vendorId}`);
+        const vendorData = await vendorResponse.json();
 
-       const vendorResponse=await fetch(`${API_URL}/vendor/single-vendor/${vendorId}`)
-      const vendorData=await vendorResponse.json();
-     if(vendorResponse.ok){
-      const vendorFirmId=vendorData.vendorFirmId;
-      const vendorFirmName=vendorData.vendor.firm[0].firmName;
-      console.log("firmname",vendorFirmName)
-      console.log("checking for firm id",vendorFirmId)
-      localStorage.setItem('firmId',vendorFirmId)
-      localStorage.setItem('firmName',vendorFirmName)
-        window.location.reload()
+        if (vendorResponse.ok) {
+          const vendorFirmId = vendorData.vendorFirmId;
+          const vendorFirmName = vendorData.vendor.firm[0].firmName;
+          console.log("firmname", vendorFirmName);
+          console.log("checking for firm id", vendorFirmId);
 
+          localStorage.setItem('firmId', vendorFirmId);
+          localStorage.setItem('firmName', vendorFirmName);
+          showwelcomeHandler();
+          window.location.reload();
+        } else {
+          console.error("Vendor fetch failed", vendorData);
+        }
+      } catch (err) {
+        console.error("Error fetching vendor details", err);
       }
-  } catch (error) {
 
+    } else {
+      alert("login failed");
+    }
+
+  } catch (error) {
+    console.error("Login failed:", error);
     alert("login failed");
   }
-}
+};
 
 
    

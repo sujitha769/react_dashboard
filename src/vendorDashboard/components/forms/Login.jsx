@@ -27,8 +27,12 @@ const Login = ({showwelcomeHandler}) => {
       localStorage.setItem('loginToken', data.token);
       showwelcomeHandler()
     }
-       const vendorId=data.vendorId
+       //const vendorId=data.vendorId
+       const vendorId = data.vendor._id;
+
        console.log("checking for vendor id",vendorId)
+       localStorage.setItem('vendorId', vendorId);
+
        const vendorResponse=await fetch(`${API_URL}/vendor/single-vendor/${vendorId}`)
       const vendorData=await vendorResponse.json();
      if(vendorResponse.ok){

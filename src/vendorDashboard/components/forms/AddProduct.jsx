@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-// import './AddFirm.css'; // Reuse the same styles
+ 
 import { API_URL } from '../../data/apiPath';
 
 const AddProduct = () => {
